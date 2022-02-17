@@ -1,0 +1,44 @@
+{
+  "name": "alertsapp2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "jest --watchAll",
+    "test:coverage": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/delfilb/alertsApp2.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/delfilb/alertsApp2/issues"
+  },
+  "homepage": "https://github.com/delfilb/alertsApp2#readme",
+  "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "@mui/icons-material": "^5.4.2",
+    "@mui/material": "^5.4.2",
+    "@mui/styled-engine-sc": "^5.4.2",
+    "@mui/styles": "^5.4.2",
+    "axios": "^0.26.0",
+    "concurrently": "^7.0.0",
+    "d3": "^7.3.0",
+    "hapi": "^18.1.0",
+    "http-proxy-middleware": "^2.0.3",
+    "material-ui-search-bar": "^1.0.0",
+    "nodemon": "^2.0.15",
+    "react-router-dom": "^6.2.1",
+    "styled-components": "^5.3.3",
+    "yarn": "^1.22.17"
+  }
+}
