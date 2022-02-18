@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {
     Table,
@@ -12,10 +12,14 @@ import {
     Paper,
     IconButton,
     Tooltip,
-    Typography
+    Typography,
+    FormControl,
+    OutlinedInput,
+    InputLabel,
+    InputAdornment
 } from '@mui/material';
-import './Table.css'
-import SearchBar from 'material-ui-search-bar';
+import './Table.css';
+import CloseIcon from '@mui/icons-material/Close';
 import { makeStyles } from '@mui/styles';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { Link } from 'react-router-dom';
@@ -41,22 +45,48 @@ const useStyles = makeStyles((theme) => ({
     display: 'grid !important',
     justifyContent: 'center',
     margin: '10px'
+  },
+  search: {
+    margin: '0 0 10px 0 !important',
+    width: '290px !important'
+  },
+  image: {
+    width: '500px'
   }
 }));
 
-const CustomTable = ({title, rows, page, rowsPerPage = 10, searchTerm, onSearch, onCancelSearch, handleChangePage, handleChangeRowsPerPage, totalPages}) => {
+const CustomTable = ({title, rows, page, rowsPerPage = 10, handleSearch, handleChangePage, handleChangeRowsPerPage, totalPages}) => {
   const classes = useStyles();
+  const [searchValue, setSearchValue] = useState('');
 
+  const onSearchChange = ({ target: { value } }) => {
+    setSearchValue(value || '');
+    handleSearch(value || '')
+  };
+  
   return (
     <div className={classes.tableDiv}>
       {title === 'Alerts' && (
-        <SearchBar
-          className={classes.searchBox}
-          placeholder="Buscar"
-          value={searchTerm}
-          onChange={(val) => onSearch(val)}
-          onCancelSearch={() => onCancelSearch()}
-        />
+        <div>
+          <FormControl sx={{ m: 1, width: '25ch' }} color="success" variant="outlined" className={classes.search}> 
+          <InputLabel >Search</InputLabel>
+          <OutlinedInput            
+            type={'text'}
+            value={searchValue}
+            onChange={onSearchChange}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={onSearchChange}
+                >
+                  <CloseIcon />
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+        </div>
       )}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 550 }}>
@@ -69,7 +99,8 @@ const CustomTable = ({title, rows, page, rowsPerPage = 10, searchTerm, onSearch,
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+          {rows.length > 0 ? (
+            rows.map((row) => (
               <TableRow
                 key={row.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -87,7 +118,14 @@ const CustomTable = ({title, rows, page, rowsPerPage = 10, searchTerm, onSearch,
                   </Tooltip> 
                 </TableCell>
               </TableRow>
-            ))}
+            ))
+          ) : (
+            <img
+              src={require('../../assets/noResults.png')}
+              alt={'title'}
+              className={classes.image}
+          />
+          )}
           </TableBody>
           <TableFooter>
             <TablePagination
@@ -101,7 +139,7 @@ const CustomTable = ({title, rows, page, rowsPerPage = 10, searchTerm, onSearch,
             />
           </TableFooter>
         </Table>
-      </TableContainer>      
+      </TableContainer>
     </div>
   );
 }

@@ -164,9 +164,6 @@ module.exports = {
   }
 
   const paginatedResults = (items, pageNum, per_pageNum) => {
-      console.log('pageNum: ', pageNum)
-      console.log('per_pageNum: ', per_pageNum)
-
     let page = pageNum || 1,
     per_page = per_pageNum || 10,
     offset = (page - 1) * per_page,

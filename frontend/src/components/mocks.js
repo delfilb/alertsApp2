@@ -1,5 +1,12 @@
 export const alertsMock = {
-    total_items: 2,
+  total_items: 2,
+  data:{
+    next_page: 1,
+		page: 0,
+		per_page: 10,
+		pre_page: -1,
+		total: 100,
+		total_pages: 10,
     data: [
     {
       "_index": "wazuh-alerts-4.x-sample-security",
@@ -139,4 +146,5 @@ export const alertsMock = {
         }
       }
     }]
+  }
 }
