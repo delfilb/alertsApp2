@@ -125,6 +125,7 @@ const RulesDialog = ({ history }) => {
                 variant="outlined"
                 label="Tipo"
                 value={data.rule.description}
+                style={{width: '100%'}}
                 inputProps={{
                     'aria-label': 'naked',
                     'readOnly': true,

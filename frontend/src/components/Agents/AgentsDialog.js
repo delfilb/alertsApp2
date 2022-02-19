@@ -125,6 +125,7 @@ const AgentsDialog = () => {
                 variant="outlined"
                 label="Tipo"
                 value={data.name}
+                style={{width: '100%'}}
                 inputProps={{
                     'aria-label': 'naked',
                     'readOnly': true,
