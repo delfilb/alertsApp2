@@ -7,3 +7,6 @@
 5. Go to localhost:3000
 
 6. For unit tests, run yarn test
+
+
+NodeJs v14.15.1
