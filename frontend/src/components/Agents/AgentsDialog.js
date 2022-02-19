@@ -24,7 +24,7 @@ import { makeStyles } from '@mui/styles';
 import { useNavigate } from 'react-router-dom';
 const axios = require('axios');
 
-const useStyles = makeStyles((theme) => ({
+const myStyles = makeStyles((theme) => ({
   table: {
     display: 'grid',
     justifyContent: 'left'
@@ -46,7 +46,7 @@ const AgentsDialog = () => {
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(true);
   const { id } = useParams();
-  const classes = useStyles();
+  const classes = myStyles();
   const navigate = useNavigate();
 
   const handleClose = () => {

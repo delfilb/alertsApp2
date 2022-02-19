@@ -13,10 +13,7 @@ import {
     IconButton,
     Tooltip,
     Typography,
-    FormControl,
-    OutlinedInput,
-    InputLabel,
-    InputAdornment
+    TextField
 } from '@mui/material';
 import './Table.css';
 import CloseIcon from '@mui/icons-material/Close';
@@ -24,7 +21,7 @@ import { makeStyles } from '@mui/styles';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
+const myStyles = makeStyles((theme) => ({
   tableDiv: {
     display: 'grid !important',
     justifyContent: 'center',
@@ -33,19 +30,6 @@ const useStyles = makeStyles((theme) => ({
   headerCell: {
     backgroundColor: '#519259'
   },
-  searchBox: {
-    marginBottom: '10px'
-  },
-  chartButton: {
-    display: 'flex',
-    justifyContent: 'end',
-    marginBottom: '10px'
-  },
-  pagination: {
-    display: 'grid !important',
-    justifyContent: 'center',
-    margin: '10px'
-  },
   search: {
     margin: '0 0 10px 0 !important',
     width: '290px !important'
@@ -53,10 +37,10 @@ const useStyles = makeStyles((theme) => ({
   image: {
     width: '500px'
   }
-}));
+})); 
 
 const CustomTable = ({title, rows, page, rowsPerPage = 10, handleSearch, handleChangePage, handleChangeRowsPerPage, totalPages}) => {
-  const classes = useStyles();
+  const classes = myStyles();
   const [searchValue, setSearchValue] = useState('');
 
   const onSearchChange = ({ target: { value } }) => {
@@ -68,24 +52,20 @@ const CustomTable = ({title, rows, page, rowsPerPage = 10, handleSearch, handleC
     <div className={classes.tableDiv}>
       {title === 'Alerts' && (
         <div>
-          <FormControl sx={{ m: 1, width: '25ch' }} color="success" variant="outlined" className={classes.search}> 
-          <InputLabel >Search</InputLabel>
-          <OutlinedInput            
-            type={'text'}
-            value={searchValue}
-            onChange={onSearchChange}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={onSearchChange}
-                >
-                  <CloseIcon />
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
+          <TextField
+          inputProps={{ 'aria-label': 'code' }}
+          size="small"
+          color="success"
+          variant="outlined"
+          label='Search'
+          className={classes.search}
+          value={searchValue}
+          onChange={onSearchChange}
+          fullWidth
+        />
+         <IconButton aria-label="close" onClick={onSearchChange}>
+          <CloseIcon/>
+        </IconButton>
         </div>
       )}
       <TableContainer component={Paper}>
@@ -102,13 +82,12 @@ const CustomTable = ({title, rows, page, rowsPerPage = 10, handleSearch, handleC
           {rows.length > 0 ? (
             rows.map((row) => (
               <TableRow
-                key={row.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                key={rows.indexOf(row)}
                 style ={ rows.indexOf(row) % 2? { background : "#efefef" }:{ background : "white" }}
               >
                 <TableCell align="center"> {row.id || row._id} </TableCell>
                 <TableCell align="center"> 
-                  <Tooltip title='See details'>
+                  <Tooltip title='See details' data-testid={'seeDetails'}>
                     <IconButton
                       component={Link}
                       to={`/api/${title.toLowerCase()}/${row.id || row._id}`}

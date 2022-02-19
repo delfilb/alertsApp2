@@ -62,19 +62,18 @@
     "react-router-dom": "^6.2.1"
   },
   "jest": {
-    "resetMocks": false,
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
     },
     "transformIgnorePatterns": [
-      "node_modules/(?!@node-fetch)/",
-      "node_modules/(?!@react-router-dom)/"
+      "node_modules/(?!@node-fetch)/"
     ],
     "setupFilesAfterEnv": [
       "./setupTests.js"
     ],
     "moduleNameMapper": {
-      "\\.(css|less)$": "identity-obj-proxy"
+      "\\.(css|less)$": "identity-obj-proxy",
+      "^react$": "<rootDir>/node_modules/react/index.js"
     }
   }
 }
